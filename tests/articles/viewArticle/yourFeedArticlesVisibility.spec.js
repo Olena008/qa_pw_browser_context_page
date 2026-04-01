@@ -27,7 +27,7 @@ test.describe(`Article visibility in 'Your Feed'`, () => {
     homePage = new HomePage(page2);
     await viewArticlePage.open(articleWithoutTags.url);
 
-    await viewArticlePage.followUnfollwArticle(user1.username);
+    await viewArticlePage.followUserArticle(user1.username);
     await viewArticlePage.assertArticleFollowed(user1.username);
 
     await createArticle(page1, articleWithOneTag);

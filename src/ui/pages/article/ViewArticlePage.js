@@ -42,9 +42,10 @@ export class ViewArticlePage {
 
   async unfollowUserArticle(username) {
     await test.step(`Click on the button to unfollow user article`, async () => {
-      this.getByRole('button', {
-        name: `Unfollow ${username}`,
-      })
+      this.page
+        .getByRole('button', {
+          name: `Unfollow ${username}`,
+        })
         .first()
         .click();
     });
