@@ -4,10 +4,13 @@ export class ViewArticlePage {
   constructor(page) {
     this.page = page;
     this.articleTitleHeader = page.getByRole('heading');
+    this.editArticleButton = page
+      .getByRole('link', { name: ' Edit Article' })
+      .first();
   }
 
   authorLinkInArticleHeader(username) {
-    return this.page.getByRole('link', { username }).first();
+    return this.page.getByRole('link', { name: username }).first();
   }
 
   url() {
@@ -16,7 +19,44 @@ export class ViewArticlePage {
 
   async open(url) {
     await test.step(`Open 'View Article' page`, async () => {
-      await this.page.goto(url);
+      await this.page.goto(url, { waitUntil: 'commit' });
+    });
+  }
+
+  async clickEditArticle() {
+    await test.step(`Click on the Edit Article button`, async () => {
+      await this.editArticleButton.click();
+    });
+  }
+
+  async followUnfollwArticle(username) {
+    await test.step(`Click on the button to follow/unfollow the article`, async () => {
+      this.page
+        .getByRole('button', { name: `Follow ${username}` })
+        .first()
+        .click();
+    });
+  }
+
+  async assertArticleFollowed(username) {
+    await test.step(`Assert user can unfollow the author`, async () => {
+      const buttons = this.page.getByRole('button', {
+        name: `Unfollow ${username}`,
+      });
+      await expect(buttons).toHaveCount(2);
+      await expect(buttons.first()).toBeVisible();
+      await expect(buttons.last()).toBeVisible();
+    });
+  }
+
+  async assertArticleUnfollowed(username) {
+    await test.step(`Assert user can unfollow the author`, async () => {
+      const buttons = this.page.getByRole('button', {
+        name: `Follow ${username}`,
+      });
+      await expect(buttons).toHaveCount(2);
+      await expect(buttons.first()).toBeVisible();
+      await expect(buttons.last()).toBeVisible();
     });
   }
 
