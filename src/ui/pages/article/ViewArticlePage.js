@@ -29,10 +29,22 @@ export class ViewArticlePage {
     });
   }
 
-  async followUnfollwArticle(username) {
-    await test.step(`Click on the button to follow/unfollow the article`, async () => {
+  async followUserArticle(username) {
+    await test.step(`Click on the button to follow user article`, async () => {
       this.page
-        .getByRole('button', { name: `Follow ${username}` })
+        .getByRole('button', {
+          name: `Follow ${username}`,
+        })
+        .first()
+        .click();
+    });
+  }
+
+  async unfollowUserArticle(username) {
+    await test.step(`Click on the button to unfollow user article`, async () => {
+      this.getByRole('button', {
+        name: `Unfollow ${username}`,
+      })
         .first()
         .click();
     });

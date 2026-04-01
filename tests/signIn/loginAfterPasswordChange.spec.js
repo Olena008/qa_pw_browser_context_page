@@ -14,8 +14,12 @@ test.beforeEach(async ({ page1, page2, user }) => {
   signInPage = new SignInPage(page2);
 });
 
-test('Successful `Sign in` after updating the password', async ({ user }) => {
+test('Successful `Sign in` after updating the password', async ({
+  user,
+  page2,
+}) => {
   const newPassword = faker.internet.password();
+  const settingsPage2 = new SettingsPage(page2);
 
   await settingsPage.clickSettingsTab();
   await settingsPage.fillNewPasswordField(newPassword);
@@ -26,5 +30,5 @@ test('Successful `Sign in` after updating the password', async ({ user }) => {
   await signInPage.fillEmailField(user.email);
   await signInPage.fillPasswordField(newPassword);
   await signInPage.clickSignInButton();
-  await settingsPage.assertProfilePage(user.username);
+  await settingsPage2.assertProfilePage(user.username);
 });

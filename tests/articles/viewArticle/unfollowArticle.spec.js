@@ -21,7 +21,7 @@ test('View an article created by another user via direct article', async ({
 
   await viewArticlePage.open(articleWithoutTags.url);
 
-  await viewArticlePage.followUnfollwArticle(user1.username);
-  await viewArticlePage.followUnfollwArticle(user1.username);
+  await viewArticlePage.followUserArticle(user1.username);
+  await viewArticlePage.unfollowUserArticle(user1.username);
   await viewArticlePage.assertArticleUnfollowed(user1.username);
 });

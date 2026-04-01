@@ -31,7 +31,7 @@ export class SettingsPage {
   async assertProfilePage(username) {
     await test.step(`Assert user returned to the profile page`, async () => {
       await expect(
-        this.page.getByText(`${username} Edit Profile`),
+        this.page.getByRole('heading', { name: `${username}` }),
       ).toBeVisible();
     });
   }

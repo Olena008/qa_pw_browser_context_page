@@ -37,8 +37,8 @@ test('View an article updated by another user', async ({
   await createArticlePage.submitCreateArticleForm(articleWithOneTag);
   await createArticlePage.clickUpdateArticleButton();
 
-  await viewArticlePage.open(articleWithoutTags.url);
-  await viewArticlePage.assertArticleTitleIsVisible(articleWithoutTags.title);
-  await viewArticlePage.assertArticleTextIsVisible(articleWithoutTags.text);
+  await viewArticlePage.open(articleWithOneTag.url);
+  await viewArticlePage.assertArticleTitleIsVisible(articleWithOneTag.title);
+  await viewArticlePage.assertArticleTextIsVisible(articleWithOneTag.text);
   await viewArticlePage.assertArticleAuthorNameIsVisible(user1.username);
 });

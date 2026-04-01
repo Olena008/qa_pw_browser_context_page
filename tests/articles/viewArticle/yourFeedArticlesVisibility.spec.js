@@ -49,7 +49,7 @@ test.describe(`Article visibility in 'Your Feed'`, () => {
     homePage = new HomePage(page2);
     await viewArticlePage.open(articleWithoutTags.url);
 
-    await viewArticlePage.followUnfollwArticle(user1.username);
+    await viewArticlePage.followUserArticle(user1.username);
     await viewArticlePage.assertArticleFollowed(user1.username);
 
     await createArticle(page1, articleWithOneTag);
@@ -60,7 +60,7 @@ test.describe(`Article visibility in 'Your Feed'`, () => {
 
     await viewArticlePage.open(articleWithoutTags.url);
 
-    await viewArticlePage.followUnfollwArticle(user1.username);
+    await viewArticlePage.unfollowUserArticle(user1.username);
     await viewArticlePage.assertArticleUnfollowed(user1.username);
 
     await page2.goto('/', { waitUntil: 'commit' });
